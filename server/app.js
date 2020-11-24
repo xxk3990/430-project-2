@@ -46,7 +46,7 @@ const router = require('./router.js');
 
 const app = express();
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
-//favicon from: https://pixabay.com/vectors/clapperboard-black-cut-director-29986/
+// favicon from: https://pixabay.com/vectors/clapperboard-black-cut-director-29986/
 app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
 app.disable('x-powered-by');
 app.use(compression());

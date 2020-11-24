@@ -13,7 +13,8 @@ const adderPage = (req, res) => {
 };
 
 const addMovie = (req, res) => {
-  if (!req.body.title || !req.body.rating || !req.body.reviewer || !req.body.trailer || !req.body.review || !req.body.plot) {
+  if (!req.body.title || !req.body.rating || !req.body.reviewer
+    || !req.body.trailer || !req.body.review || !req.body.plot) {
     return res.status(400).json({ error: 'Title, plot, rating, review and trailer are required!' });
   }
   const movieData = {
@@ -63,7 +64,6 @@ const profilePage = (req, res) => {
 };
 
 const getAllMovies = (request, response) => {
-  const req = request;
   const res = response;
   return Movie.MovieModel.findAllMovies((err, docs) => {
     if (err) {

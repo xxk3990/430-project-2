@@ -5,6 +5,7 @@ const _ = require('underscore');
 const {
   v4: uuidv4,
 } = require('uuid');
+
 let MovieModel = {};
 const convertId = mongoose.Types.ObjectId;
 const setTitle = (title) => _.escape(title).trim();
