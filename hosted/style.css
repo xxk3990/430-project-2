@@ -52,7 +52,7 @@ nav:nth-child(1) {
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    background-color: #054B93;
 }
 
 #movieForm {
@@ -83,7 +83,7 @@ nav:nth-child(1) {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
-    background-color: #55acee;
+    background-color: #054B93;
     border-radius: 2px;
     color: white;
     text-decoration: none;
@@ -98,7 +98,7 @@ nav:nth-child(1) {
 
 .makeMovieSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #054B93;
 }
 
 .mainForm {
@@ -198,9 +198,6 @@ nav:nth-child(1) {
     margin-left: 135px;
     height: 450px;
     width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg);
-    transform: rotate(330deg);
 }
 
 .movie-data {
@@ -248,8 +245,6 @@ nav:nth-child(1) {
 .movie:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255, 255, 255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
 }
 
 .loginLink {
