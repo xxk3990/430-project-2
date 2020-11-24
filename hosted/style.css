@@ -295,6 +295,9 @@ h3.emptyMovie {
 #invisibleProfileForm {
     display: none;
 }
+#profileHeading {
+    background-color: #054B93;
+}
 #profileHeading h2 {
     text-align: center;
     color: white;
