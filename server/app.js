@@ -45,6 +45,7 @@ const redisClient = redis.createClient({
 const router = require('./router.js');
 
 const app = express();
+//Background image from: https://pixabay.com/photos/cinema-hall-film-cinema-lovers-2502213/
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 // favicon from: https://pixabay.com/vectors/clapperboard-black-cut-director-29986/
 app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
