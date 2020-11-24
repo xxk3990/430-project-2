@@ -16,7 +16,6 @@ const UserMovieList = function(props) {
                     <section id="reviews">
                         <h4 className="movie-review-header">Reviews:</h4>
                         <div className="rating-results">
-                            <h5 className = 'reviewer'>{movie.review.reviewer}</h5>
                             <p className = "rating">Rating: {movie.review.rating} stars</p>
                             <p className="review">{movie.review.review}</p>
                         </div> 

@@ -5,6 +5,9 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    /* image from: https://pixabay.com/photos/cinema-curtain-theater-film-4609877/ */
+    background: url('./img/cinema-background.jpg');
+    background-size: auto;
 }
 
 #logo {
@@ -99,11 +102,15 @@ nav:nth-child(1) {
 }
 
 .mainForm {
-    height: 300px;
+    height: 200px;
     width: 350px;
     margin: 0 auto;
-    padding-top: 350px;
     font-size: 1.2em;
+    background-color: #054B93;
+    color: white;
+    text-align: center;
+    margin-top: 100px;
+    padding-top: 50px;
 }
 
 .mainForm h3 {
@@ -116,6 +123,9 @@ nav:nth-child(1) {
     margin-right: 10px;
     text-align: right;
     font-size: 1.2em;
+}
+#loginToAdd {
+    text-align: center;
 }
 
 #movieMessage {
@@ -284,4 +294,8 @@ h3.emptyMovie {
 
 #invisibleProfileForm {
     display: none;
+}
+#profileHeading h2 {
+    text-align: center;
+    color: white;
 }

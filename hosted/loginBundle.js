@@ -60,7 +60,9 @@ var LoginWindow = function LoginWindow(props) {
     className: "formSubmit",
     type: "submit",
     value: "Sign in"
-  }));
+  }), /*#__PURE__*/React.createElement("div", {
+    id: "loginToAdd"
+  }, /*#__PURE__*/React.createElement("h4", null, "Login to add movies to the API!")));
 };
 
 var SignupWindow = function SignupWindow(props) {
@@ -100,7 +102,9 @@ var SignupWindow = function SignupWindow(props) {
     className: "formSubmit",
     type: "submit",
     value: "Sign up"
-  }));
+  }), /*#__PURE__*/React.createElement("div", {
+    id: "loginToAdd"
+  }, /*#__PURE__*/React.createElement("h4", null, "Sign up to add movies to the API!")));
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {

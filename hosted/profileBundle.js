@@ -27,9 +27,7 @@ var UserMovieList = function UserMovieList(props) {
       className: "movie-review-header"
     }, "Reviews:"), /*#__PURE__*/React.createElement("div", {
       className: "rating-results"
-    }, /*#__PURE__*/React.createElement("h5", {
-      className: "reviewer"
-    }, movie.review.reviewer), /*#__PURE__*/React.createElement("p", {
+    }, /*#__PURE__*/React.createElement("p", {
       className: "rating"
     }, "Rating: ", movie.review.rating, " stars"), /*#__PURE__*/React.createElement("p", {
       className: "review"
