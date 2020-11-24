@@ -5,9 +5,9 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    /* image from: https://pixabay.com/photos/cinema-curtain-theater-film-4609877/ */
+    /* image from: https://pixabay.com/photos/cinema-hall-film-cinema-lovers-2502213/ */
     background: url('./img/cinema-background.jpg');
-    background-size: auto;
+    background-size: cover;
 }
 
 #logo {
@@ -301,4 +301,5 @@ h3.emptyMovie {
 #profileHeading h2 {
     text-align: center;
     color: white;
+    margin-top: 0;
 }
