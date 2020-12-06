@@ -114,8 +114,9 @@ const newPW = (request, response) => {
     });
   }
   if (req.body.username !== req.session.account.username) {
+    // if req.session.account._id can be accessed, I guessed I could do the same with username!
     return res.status(400).json({
-      error: 'Cut! The username you entered is not the one associated with this account.', //bonus security measure just in case
+      error: 'Cut! The username you entered is not the one associated with this account.', // bonus security measure just in case
     });
   }
   return Account.AccountModel.generateHash(req.body.newPW, (salt, hash) => {
@@ -129,21 +130,20 @@ const newPW = (request, response) => {
       new: true,
     };
     // https://stackoverflow.com/questions/32811510/mongoose-findoneandupdate-doesnt-return-updated-document
-    // and https://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
+    // https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndUpdate
     return Account.AccountModel.findByIdAndUpdate(newPWData._id, {
-        password: newPWData.password,
-      },
-      {options}, (err, doc) => {
-        if (err) {
-          console.log(`error: ${err}`);
-        } else {
-          //console.log(`new pw: ${newPWData.password}`);
-          // return res.json({
-          //   redirect: '/login' //have em login again to verify
-          // })
-        }
-      },
-    );
+      password: newPWData.password,
+    },
+    { options }, (err, doc) => {
+      if (err) {
+        console.log(`error: ${err}`);
+      } else {
+        console.log(`new doc: ${doc}`);
+        // return res.json({
+        //   redirect: '/login' //have em login again to verify
+        // })
+      }
+    });
   });
 };
 // const userList = (req, res) => {

@@ -20,7 +20,7 @@ const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false, //required for findByIdAndUpdate()
+  useFindAndModify: false, // required for findByIdAndUpdate()
 };
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {

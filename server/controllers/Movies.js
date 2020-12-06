@@ -17,7 +17,7 @@ const addMovie = (req, res) => {
     || !req.body.trailer || !req.body.review || !req.body.plot) {
     return res.status(400).json({ error: 'Title, plot, rating, review and trailer are required!' });
   }
-  const noDuplicate = req.body.title.toUpperCase(); //prevents duplicates
+  const noDuplicate = req.body.title.toUpperCase(); // prevents duplicates
   const movieData = {
     title: noDuplicate,
     plot: req.body.plot,
