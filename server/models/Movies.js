@@ -27,7 +27,7 @@ const MovieSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    reviewer: {
+    reviewerName: {
       type: String,
       required: true,
     },
@@ -59,7 +59,7 @@ MovieSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   plot: doc.plot,
   review: doc.review.review,
-  reviewer: doc.review.reviewer,
+  reviewerName: doc.review.reviewerName,
   rating: doc.review.rating,
   trailer: doc.trailer,
 });
@@ -67,11 +67,11 @@ MovieSchema.statics.findByUser = (userId, callback) => {
   const search = {
     user: convertId(userId),
   };
-  return MovieModel.find(search).select('title plot review reviewer rating trailer').lean().exec(callback);
+  return MovieModel.find(search).select('title plot review reviewerName rating trailer').lean().exec(callback);
 };
 MovieSchema.statics.findAllMovies = (callback) => {
   const showAll = {};
-  return MovieModel.find(showAll).select('title plot review reviewer rating trailer').lean().exec(callback);
+  return MovieModel.find(showAll).select('title plot review reviewerName rating trailer').lean().exec(callback);
 };
 MovieModel = mongoose.model('Movies', MovieSchema);
 module.exports.MovieModel = MovieModel;

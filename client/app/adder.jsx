@@ -32,8 +32,8 @@ const MovieForm = (props) => {
                     <textarea id="movieReview" name="review"/>
                 </span>
                  <span>
-                    <label htmlFor = "reviewer">Your Name: </label>
-                    <input id="movieReviewer" type="text" name="reviewer" placeholder="your name" />
+                    <label htmlFor = "reviewerName">Your Name: </label>
+                    <input id="movieReviewer" type="text" name="reviewerName" placeholder="your name" />
                 </span>
                 <span>
                     <label htmlFor = "rating">Rating (out of 5 stars): </label>
@@ -79,7 +79,7 @@ const MovieList = function(props) {
                     <section id="reviews">
                         <h4 className="movie-review-header">Reviews:</h4>
                         <div className="rating-results">
-                            <h5 className = 'reviewer'>{movie.review.reviewer}</h5>
+                            <h5 className = 'reviewer'>{movie.review.reviewerName}</h5>
                             <p className = "rating">Rating: {movie.review.rating} stars</p>
                             <p className="review">{movie.review.review}</p>
                         </div> 

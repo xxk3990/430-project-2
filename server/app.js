@@ -20,6 +20,7 @@ const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false, //required for findByIdAndUpdate()
 };
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {
@@ -45,7 +46,7 @@ const redisClient = redis.createClient({
 const router = require('./router.js');
 
 const app = express();
-//Background image from: https://pixabay.com/photos/cinema-hall-film-cinema-lovers-2502213/
+// Background image from: https://pixabay.com/photos/cinema-hall-film-cinema-lovers-2502213/
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 // favicon from: https://pixabay.com/vectors/clapperboard-black-cut-director-29986/
 app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
@@ -59,7 +60,7 @@ app.use(session({
   store: new RedisStore({
     client: redisClient,
   }),
-  secret: 'Domo Arigato',
+  secret: 'Lights Camera Action',
   resave: true,
   saveUninitialized: true,
   cookie: {

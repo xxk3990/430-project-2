@@ -1,3 +1,23 @@
+const handlePWChange = (e) => {
+    e.preventDefault();
+    if($("#oldPW").val() == $("newPW").val() || $("#oldPW").val() == $("newPW2").val()) {
+        handleError('Cut! Please enter a PW different than the old one.');
+        return false;
+    }
+    if($("#newPW").val() !== $("#newPW2").val()) {
+        handleError('Cut! New passwords do not match.');
+        return false;
+    }
+    if($("#user").val() == '' || $("#oldPW").val() == '' || $("#newPW").val() == '') {
+        handleError('Cut! Please enter data in all fields.');
+        return false;
+    }
+    sendAjax('POST', $("#newPWForm").attr('action'), $("#newPWForm").serialize(), redirect);
+    return false;
+    
+};
+
+
 const UserMovieList = function(props) {
     if(props.movies.length === 0) {
         return (
@@ -15,7 +35,7 @@ const UserMovieList = function(props) {
                     <p className="plot">{movie.plot}</p>
                     <section id="reviews">
                         <h4 className="movie-review-header">Reviews:</h4>
-                        <div className="rating-results">
+                         <div className="rating-results"> {/* No need for reviewer name if on profile */}
                             <p className = "rating">Rating: {movie.review.rating} stars</p>
                             <p className="review">{movie.review.review}</p>
                         </div> 
@@ -42,6 +62,28 @@ const InvisibleProfileForm = (props) => {
         </form>
     );
 };
+
+const ChangePWForm = (props) => {
+    return (
+        <form id = "newPWForm"
+        name = "newPWForm"
+        onSubmit = {handlePWChange}
+        method = 'POST'
+        action = '/newPW'
+        className = "newPWForm">
+            <label htmlFor = "username">To make sure it's you, please enter the username associated with this account.</label><br/>
+            <input id ="user" type="text" name="username" placeholder="username" />
+            <label htmlFor = "oldPW">Please enter your old (current) password.</label>
+            <input id ="oldPW" type="password" name="oldPW" placeholder="old/current password" />
+            <label htmlFor = "newPW">Please enter your new password.</label>
+            <input id ="newPW" type="password" name="newPW" placeholder="new password" />
+            <label htmlFor = "newPW2">Please re-enter your new password.</label>
+            <input id ="newPW2" type="password" name="newPW2" placeholder="re-enter new password" />
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <input className="newPWformSubmit" type="submit" value="Submit new password" />
+        </form>
+    )
+}
     
    
 
@@ -59,6 +101,9 @@ const setup = function(csrf) {
     );
     ReactDOM.render(
         <InvisibleProfileForm csrf={csrf} />, document.querySelector("#invisibleProfileForm")
+    );
+    ReactDOM.render(
+        <ChangePWForm csrf = {csrf}/>, document.querySelector("#changePW-form")
     );
     loadMoviesFromServer();
 }

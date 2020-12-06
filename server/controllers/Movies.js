@@ -13,16 +13,17 @@ const adderPage = (req, res) => {
 };
 
 const addMovie = (req, res) => {
-  if (!req.body.title || !req.body.rating || !req.body.reviewer
+  if (!req.body.title || !req.body.rating || !req.body.reviewerName
     || !req.body.trailer || !req.body.review || !req.body.plot) {
     return res.status(400).json({ error: 'Title, plot, rating, review and trailer are required!' });
   }
+  const noDuplicate = req.body.title.toUpperCase(); //prevents duplicates
   const movieData = {
-    title: req.body.title,
+    title: noDuplicate,
     plot: req.body.plot,
     review: {
       review: req.body.review,
-      reviewer: req.body.reviewer,
+      reviewerName: req.body.reviewerName,
       rating: req.body.rating,
     },
     trailer: req.body.trailer,
@@ -77,4 +78,4 @@ module.exports.adderPage = adderPage;
 module.exports.getMoviesByUser = getMoviesByUser;
 module.exports.getAllMovies = getAllMovies;
 module.exports.profile = profilePage;
-module.exports.add = addMovie;
+module.exports.addMovie = addMovie;

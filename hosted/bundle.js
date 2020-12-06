@@ -42,11 +42,11 @@ var MovieForm = function MovieForm(props) {
     id: "movieReview",
     name: "review"
   })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "reviewer"
+    htmlFor: "reviewerName"
   }, "Your Name: "), /*#__PURE__*/React.createElement("input", {
     id: "movieReviewer",
     type: "text",
-    name: "reviewer",
+    name: "reviewerName",
     placeholder: "your name"
   })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
     htmlFor: "rating"
@@ -123,7 +123,7 @@ var MovieList = function MovieList(props) {
       className: "rating-results"
     }, /*#__PURE__*/React.createElement("h5", {
       className: "reviewer"
-    }, movie.review.reviewer), /*#__PURE__*/React.createElement("p", {
+    }, movie.review.reviewerName), /*#__PURE__*/React.createElement("p", {
       className: "rating"
     }, "Rating: ", movie.review.rating, " stars"), /*#__PURE__*/React.createElement("p", {
       className: "review"
