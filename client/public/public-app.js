@@ -14,14 +14,6 @@ const MovieList = function(props) {
                     <h3 className="title"><em>{movie.title}</em></h3>
                     <h4 className="movie-plot-header">Plot:</h4>
                     <p className="plot">{movie.plot}</p>
-                    <section id="reviews">
-                        <h4 className="movie-review-header">Reviews:</h4>
-                        <div className="rating-results">
-                            <h5 className = 'reviewer'>{movie.review.reviewerName}</h5>
-                            <p className = "rating">Rating: {movie.review.rating} stars</p>
-                            <p className="review">{movie.review.review}</p>
-                        </div> 
-                    </section>
                     <h3 className="trailer"><a target="_blank"
                     href={movie.trailer}>Trailer</a></h3>
                 </section> 
