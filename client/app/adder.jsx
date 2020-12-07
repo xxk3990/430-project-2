@@ -26,6 +26,7 @@ const MovieForm = (props) => {
                     <label htmlFor = "title">Title: </label>
                     <input id="movieTitle" type="text" name="title" placeholder="Movie title" />
                 </span>
+                <label className = "warning">Please use roman numerals for numbers and colons wherever possible!</label>
                 <span>
                     <label htmlFor = "plot">Plot: </label>
                     <textarea id="moviePlot" name="plot" placeholder="movie plot"/>

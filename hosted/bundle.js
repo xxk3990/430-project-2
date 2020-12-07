@@ -32,7 +32,9 @@ var MovieForm = function MovieForm(props) {
     type: "text",
     name: "title",
     placeholder: "Movie title"
-  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
+  })), /*#__PURE__*/React.createElement("label", {
+    className: "warning"
+  }, "Please use roman numerals for numbers and colons wherever possible!"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
     htmlFor: "plot"
   }, "Plot: "), /*#__PURE__*/React.createElement("textarea", {
     id: "moviePlot",

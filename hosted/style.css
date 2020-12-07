@@ -57,7 +57,6 @@ nav:nth-child(1) {
 
 .movieForm label, #addReviewForm label {
     display: inline-block;
-    width: 75px;
     font-size: 1em;
     text-align: center;
     color: white;
@@ -327,4 +326,7 @@ h3.emptyMovie {
 } */
 .addMovieHeader {
     color: white;
+}
+.warning {
+    width: 200px;
 }

@@ -21,7 +21,7 @@ const mongooseOptions = {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false, // required for findByIdAndUpdate(),
-  //https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndUpdate
+  // https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndUpdate
 };
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {

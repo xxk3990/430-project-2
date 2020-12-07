@@ -35,8 +35,9 @@ const ReviewForm = (props) => {
         <h3 className ="addReviewHeader">Add review</h3>
         <span>
             <label htmlFor = "title">Title: </label>
-            <input id="movieTitle" type="text" name="title" placeholder="Movie title" />
+            <input id="movieTitle" type="text" name="title" placeholder="Movie title" />  
         </span>
+        <label className = "warning">Please use roman numerals for numbers and colons wherever possible!</label>
         <span>
             <label htmlFor = "review">Review: </label>
             <textarea id="newReview" name="review"/>
