@@ -1,61 +1,5 @@
 "use strict";
 
-var handleMovie = function handleMovie(e) {
-  e.preventDefault();
-  $("#movieMessage").css('visibility', 'visible');
-
-  if ($("#movieTitle").val() == '' || $("#moviePlot").val() == '' || $("#movieReview").val() == '' || $("#movieReviewer").val() == '' || $("#movieRating").val() == '' || $("#movieTrailer").val() == '') {
-    handleError('Cut! All fields are required.');
-    return false;
-  }
-
-  sendAjax('POST', $("#movieForm").attr('action'), $("#movieForm").serialize(), function () {
-    loadMoviesFromServer();
-  });
-  return false;
-};
-
-var MovieForm = function MovieForm(props) {
-  return /*#__PURE__*/React.createElement("form", {
-    id: "movieForm",
-    onSubmit: handleMovie,
-    name: "movieForm",
-    action: "/adder_signedIn",
-    method: "POST",
-    className: "movieForm"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "addMovieHeader"
-  }, "Add a plot and trailer for a movie!"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "title"
-  }, "Title: "), /*#__PURE__*/React.createElement("input", {
-    id: "movieTitle",
-    type: "text",
-    name: "title",
-    placeholder: "Movie title"
-  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "plot"
-  }, "Plot: "), /*#__PURE__*/React.createElement("textarea", {
-    id: "moviePlot",
-    name: "plot",
-    placeholder: "movie plot"
-  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "trailer"
-  }, "Trailer: "), /*#__PURE__*/React.createElement("input", {
-    id: "movieTrailer",
-    type: "url",
-    name: "trailer",
-    placeholder: "Movie Trailer"
-  })), /*#__PURE__*/React.createElement("input", {
-    type: "hidden",
-    name: "_csrf",
-    value: props.csrf
-  }), /*#__PURE__*/React.createElement("input", {
-    className: "makeMovieSubmit",
-    type: "submit",
-    value: "Add Movie"
-  }));
-};
-
 var MovieList = function MovieList(props) {
   if (props.movies.length === 0) {
     return /*#__PURE__*/React.createElement("div", {
@@ -103,7 +47,6 @@ var MovieList = function MovieList(props) {
 };
 
 var loadMoviesFromServer = function loadMoviesFromServer() {
-  $("#movieMessage").css('visibility', 'hidden');
   sendAjax('GET', '/allMovies', null, function (data) {
     ReactDOM.render( /*#__PURE__*/React.createElement(MovieList, {
       movies: data.movies
@@ -111,24 +54,15 @@ var loadMoviesFromServer = function loadMoviesFromServer() {
   });
 };
 
-var setupMovies = function setupMovies(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(MovieForm, {
-    csrf: csrf
-  }), document.querySelector("#addMovie"));
+var setup = function setup() {
   ReactDOM.render( /*#__PURE__*/React.createElement(MovieList, {
     movies: []
   }), document.querySelector("#movies"));
   loadMoviesFromServer();
 };
 
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setupMovies(result.csrfToken);
-  });
-};
-
 $(document).ready(function () {
-  getToken();
+  setup();
 });
 "use strict";
 

@@ -41,7 +41,7 @@ const login = (request, response) => {
     }
     req.session.account = Account.AccountModel.toAPI(account);
     return res.json({
-      redirect: '/adder',
+      redirect: '/app-signedIn',
     });
   });
 };
@@ -74,7 +74,7 @@ const signup = (request, response) => {
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       return res.json({
-        redirect: '/adder',
+        redirect: '/app-signedIn',
       });
     });
     savePromise.catch((err) => {
@@ -93,12 +93,12 @@ const signup = (request, response) => {
 const newPW = (request, response) => {
   const req = request;
   const res = response;
-  req.body.oldPW = `${req.body.oldPW}`;
+  req.body.pass = `${req.body.pass}`;
   req.body.newPW = `${req.body.newPW}`;
   req.body.newPW2 = `${req.body.newPW2}`;
   req.body.username = `${req.body.username}`;
 
-  if (req.body.oldPW === req.body.newPW || req.body.oldPW === req.body.newPW2) {
+  if (req.body.pass === req.body.newPW || req.body.pass === req.body.newPW2) {
     return res.status(400).json({
       error: 'Cut! New password is the same as the old one!',
     });
@@ -108,7 +108,7 @@ const newPW = (request, response) => {
       error: 'Cut! New passwords do not match!',
     });
   }
-  if (!req.body.oldPW || !req.body.newPW || !req.body.newPW2) {
+  if (!req.body.pass || !req.body.newPW || !req.body.newPW2 || !req.body.username) {
     return res.status(400).json({
       error: 'Cut! All fields are required.',
     });
@@ -120,35 +120,35 @@ const newPW = (request, response) => {
     });
   }
   return Account.AccountModel.generateHash(req.body.newPW, (salt, hash) => {
+    // https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndUpdate
+    // and https://kb.objectrocket.com/mongo-db/how-to-use-the-mongoose-findbyidandupdate-method-924
+
+    /*
+  //THIS CODE WORKS FOR UPDATING THE PW. I CHECKED IN MONGO AND SAW THAT THE
+  PW WAS IN FACT GETTING UPDATED, BUT WHEN I TRIED TO LOG IN WITH THE NEW PW IT FAILED.
+  */
     console.log('hash function reached');
     const newPWData = {
+      username: req.body.username,
       _id: req.session.account._id,
       salt,
       password: hash,
     };
-    const options = {
-      new: true,
-    };
-    // https://stackoverflow.com/questions/32811510/mongoose-findoneandupdate-doesnt-return-updated-document
-    // https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndUpdate
     return Account.AccountModel.findByIdAndUpdate(newPWData._id, {
       password: newPWData.password,
-    },
-    { options }, (err, doc) => {
+    }, {
+      new: true,
+    }, (err, doc) => {
       if (err) {
         console.log(`error: ${err}`);
-      } else {
-        console.log(`new doc: ${doc}`);
-        // return res.json({
-        //   redirect: '/login' //have em login again to verify
-        // })
       }
+      console.log(`new doc: ${doc}`);
+      return res.json({
+        redirect: '/login', // have em login again to verify
+      });
     });
   });
 };
-// const userList = (req, res) => {
-//   res.render('userList');
-// };
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;

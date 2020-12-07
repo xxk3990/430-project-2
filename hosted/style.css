@@ -10,13 +10,6 @@ body {
     background-size: cover;
 }
 
-#logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float: left;
-    border-radius: 8px;
-}
 
 nav {
     width: 100%;
@@ -62,7 +55,7 @@ nav:nth-child(1) {
     text-align: center;
 }
 
-.movieForm label {
+.movieForm label, #addReviewForm label {
     display: inline-block;
     width: 75px;
     font-size: 1em;
@@ -71,7 +64,7 @@ nav:nth-child(1) {
     background-color: #054B93;
 }
 
-.movieForm span {
+.movieForm span, #addReviewForm span {
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: #054B93;
@@ -229,7 +222,7 @@ nav:nth-child(1) {
     color: orange;
 }
 
-.movie {
+.movie, .ratingReviews {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -265,24 +258,15 @@ h3.emptyMovie {
     margin-top: 18px;
 }
 
-#addReview {
-    display: none;
-    z-index: 300;
-    position: relative;
-    background-color: #054B93;
-    width: 40%;
-    height: 50%;
-    border: 5px solid white;
-}
 #addReviewForm {
-    text-align: center;
-    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    color: white;
 }
 
-.movieList, .userMovieList {
+.movieList, .userMovieList, .reviewList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* repeat() allows for adding dynamic elements to grid */
@@ -304,13 +288,13 @@ h3.emptyMovie {
     margin-bottom: 10px;
 }
 
-#invisibleProfileForm {
+#invisibleProfileForm, #invisibleReviewsForm {
     display: none;
 }
-#profileHeading {
+#profileHeading, #publicHeading {
     background-color: #054B93;
 }
-#profileHeading h2 {
+#profileHeading h2, #publicHeading h2 {
     text-align: center;
     color: white;
     margin-top: 0;
@@ -331,4 +315,16 @@ h3.emptyMovie {
 }
 #change-pw-heading {
     text-align: center;
+}
+
+/* #search-reviews {
+    display: flex; 
+    justify-content:center;
+}
+#search-reviews label {
+    background-color: #054B93;
+    color: white;
+} */
+.addMovieHeader {
+    color: white;
 }

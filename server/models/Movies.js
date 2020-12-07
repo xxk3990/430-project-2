@@ -22,20 +22,6 @@ const MovieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  review: { // review props are in nested object
-    review: {
-      type: String,
-      required: true,
-    },
-    reviewerName: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-    },
-  },
   user: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -58,9 +44,6 @@ const MovieSchema = new mongoose.Schema({
 MovieSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   plot: doc.plot,
-  review: doc.review.review,
-  reviewerName: doc.review.reviewerName,
-  rating: doc.review.rating,
   trailer: doc.trailer,
 });
 MovieSchema.statics.findByUser = (userId, callback) => {

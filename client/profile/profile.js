@@ -33,13 +33,6 @@ const UserMovieList = function(props) {
                     <h3 className="title"><em>{movie.title}</em></h3>
                     <h4 className="movie-plot-header">Plot:</h4>
                     <p className="plot">{movie.plot}</p>
-                    <section id="reviews">
-                        <h4 className="movie-review-header">Reviews:</h4>
-                         <div className="rating-results"> {/* No need for reviewer name if on profile */}
-                            <p className = "rating">Rating: {movie.review.rating} stars</p>
-                            <p className="review">{movie.review.review}</p>
-                        </div> 
-                    </section>
                     <h3 className="trailer"><a target="_blank"
                     href={movie.trailer}>Trailer</a></h3>
                 </section> 
@@ -52,6 +45,29 @@ const UserMovieList = function(props) {
         </div>
     );
 }
+const UserReviewList = function(props) { //TURN REVIEWS INTO SEPARATE SECTION!
+        if(props.reviews.length === 0) {
+            return (
+                <div className="userMovieList">
+                    <h3 className = "emptyMovies">No Reviews Yet</h3>
+                </div>
+            );
+        }
+        const reviewNodes = props.reviews.map(function(rev) {
+            return (
+                    <div key={rev._id} className = "ratingReviews">
+                        <h3 className="title"><em>{rev.title}</em></h3>
+                        <p className = "rating">Rating: {rev.review.rating} stars</p>
+                        <p className="review">{rev.review.review}</p>
+                    </div>
+                )
+        });
+        return(
+            <div className="userMovieList">
+                {reviewNodes}
+            </div>
+        );
+    }
 
 const InvisibleProfileForm = (props) => {
     return (
@@ -73,8 +89,8 @@ const ChangePWForm = (props) => {
         className = "newPWForm">
             <label htmlFor = "username">To make sure it's you, please enter the username associated with this account.</label><br/>
             <input id ="user" type="text" name="username" placeholder="username" />
-            <label htmlFor = "oldPW">Please enter your old (current) password.</label>
-            <input id ="oldPW" type="password" name="oldPW" placeholder="old/current password" />
+            <label htmlFor = "pass">Please enter your old (current) password.</label>
+            <input id ="oldPW" type="password" name="pass" placeholder="old/current password" />
             <label htmlFor = "newPW">Please enter your new password.</label>
             <input id ="newPW" type="password" name="newPW" placeholder="new password" />
             <label htmlFor = "newPW2">Please re-enter your new password.</label>
@@ -94,6 +110,13 @@ const loadMoviesFromServer = () => {
         );
     });
 }
+const loadReviewsFromServer = () => {
+    sendAjax('GET', '/reviewsByUser', null, (data) => {
+        ReactDOM.render(
+            <UserReviewList reviews = {data.reviews} />, document.querySelector("#reviewsByUser")
+        );
+    });
+}
 
 const setup = function(csrf) {
     ReactDOM.render(
@@ -106,6 +129,7 @@ const setup = function(csrf) {
         <ChangePWForm csrf = {csrf}/>, document.querySelector("#changePW-form")
     );
     loadMoviesFromServer();
+    loadReviewsFromServer();
 }
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {

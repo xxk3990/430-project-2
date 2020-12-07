@@ -43,17 +43,7 @@ var UserMovieList = function UserMovieList(props) {
       className: "movie-plot-header"
     }, "Plot:"), /*#__PURE__*/React.createElement("p", {
       className: "plot"
-    }, movie.plot), /*#__PURE__*/React.createElement("section", {
-      id: "reviews"
-    }, /*#__PURE__*/React.createElement("h4", {
-      className: "movie-review-header"
-    }, "Reviews:"), /*#__PURE__*/React.createElement("div", {
-      className: "rating-results"
-    }, " ", /*#__PURE__*/React.createElement("p", {
-      className: "rating"
-    }, "Rating: ", movie.review.rating, " stars"), /*#__PURE__*/React.createElement("p", {
-      className: "review"
-    }, movie.review.review))), /*#__PURE__*/React.createElement("h3", {
+    }, movie.plot), /*#__PURE__*/React.createElement("h3", {
       className: "trailer"
     }, /*#__PURE__*/React.createElement("a", {
       target: "_blank",
@@ -63,6 +53,33 @@ var UserMovieList = function UserMovieList(props) {
   return /*#__PURE__*/React.createElement("div", {
     className: "userMovieList"
   }, movieNodes);
+};
+
+var UserReviewList = function UserReviewList(props) {
+  //TURN REVIEWS INTO SEPARATE SECTION!
+  if (props.reviews.length === 0) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "userMovieList"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "emptyMovies"
+    }, "No Reviews Yet"));
+  }
+
+  var reviewNodes = props.reviews.map(function (rev) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: rev._id,
+      className: "ratingReviews"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "title"
+    }, /*#__PURE__*/React.createElement("em", null, rev.title)), /*#__PURE__*/React.createElement("p", {
+      className: "rating"
+    }, "Rating: ", rev.review.rating, " stars"), /*#__PURE__*/React.createElement("p", {
+      className: "review"
+    }, rev.review.review));
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: "userMovieList"
+  }, reviewNodes);
 };
 
 var InvisibleProfileForm = function InvisibleProfileForm(props) {
@@ -93,11 +110,11 @@ var ChangePWForm = function ChangePWForm(props) {
     name: "username",
     placeholder: "username"
   }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "oldPW"
+    htmlFor: "pass"
   }, "Please enter your old (current) password."), /*#__PURE__*/React.createElement("input", {
     id: "oldPW",
     type: "password",
-    name: "oldPW",
+    name: "pass",
     placeholder: "old/current password"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "newPW"
@@ -132,6 +149,14 @@ var loadMoviesFromServer = function loadMoviesFromServer() {
   });
 };
 
+var loadReviewsFromServer = function loadReviewsFromServer() {
+  sendAjax('GET', '/reviewsByUser', null, function (data) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(UserReviewList, {
+      reviews: data.reviews
+    }), document.querySelector("#reviewsByUser"));
+  });
+};
+
 var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(UserMovieList, {
     movies: []
@@ -143,6 +168,7 @@ var setup = function setup(csrf) {
     csrf: csrf
   }), document.querySelector("#changePW-form"));
   loadMoviesFromServer();
+  loadReviewsFromServer();
 };
 
 var getToken = function getToken() {

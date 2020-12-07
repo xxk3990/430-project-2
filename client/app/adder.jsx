@@ -11,45 +11,24 @@ const handleMovie = (e) => {
     });
     return false;
 }
+
+
 const MovieForm = (props) => {
     return(
         <form id = "movieForm"
             onSubmit = {handleMovie}
             name="movieForm"
-            action="/adder"
+            action="/adder_signedIn"
             method="POST"
             className="movieForm">
+                <h3 className ="addMovieHeader">Add a plot and trailer for a movie!</h3>
                 <span>
                     <label htmlFor = "title">Title: </label>
                     <input id="movieTitle" type="text" name="title" placeholder="Movie title" />
                 </span>
                 <span>
-                    <label htmlFor = "plot">Plot </label>
+                    <label htmlFor = "plot">Plot: </label>
                     <textarea id="moviePlot" name="plot" placeholder="movie plot"/>
-                </span>
-                <span>
-                    <label htmlFor = "review">Review: </label>
-                    <textarea id="movieReview" name="review"/>
-                </span>
-                 <span>
-                    <label htmlFor = "reviewerName">Your Name: </label>
-                    <input id="movieReviewer" type="text" name="reviewerName" placeholder="your name" />
-                </span>
-                <span>
-                    <label htmlFor = "rating">Rating (out of 5 stars): </label>
-                    <select id='movieRating' name = "rating">
-                        <option value='0'>0 stars </option>
-                        <option value='0.5'>0.5 stars </option>
-                        <option value='1'>1 star </option>
-                        <option value='1.5'>1.5 stars </option>
-                        <option value='2'>2 stars </option>
-                        <option value='2.5'>2.5 stars </option>
-                        <option value='3'>3 stars </option>
-                        <option value='3.5'>3.5 stars </option>
-                        <option value='4'>4 stars </option>
-                        <option value='4.5'>4.5 stars </option>
-                        <option value='5'>5 stars </option>
-                    </select>
                 </span>
                 <span>
                     <label htmlFor = "trailer">Trailer: </label>
@@ -105,7 +84,7 @@ const loadMoviesFromServer = () => {
     });
 }
 
-const setup = function(csrf) {
+const setupMovies = function(csrf) {
     ReactDOM.render(
         <MovieForm csrf={csrf} />, document.querySelector("#addMovie")
     );
@@ -116,7 +95,7 @@ const setup = function(csrf) {
 }
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
-        setup(result.csrfToken);
+        setupMovies(result.csrfToken);
     })
 }
 $(document).ready(function() {

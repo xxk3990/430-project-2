@@ -7,7 +7,7 @@ const requiresLogin = (req, res, next) => {
 
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/adder');
+    return res.redirect('/app-signedIn');
   }
   return next();
 };
@@ -20,9 +20,9 @@ const requiresSecure = (req, res, next) => {
 };
 const redirect404 = (req, res) => {
   if (req.session.account) {
-    return res.redirect('/adder'); // redirect to adder page if logged in
+    return res.redirect('/app-signedIn'); // redirect to adder page if logged in
   }
-  return res.redirect('/login'); // redirect to login page if not
+  return res.redirect('/app-public'); // redirect to public app page if not
 };
 
 const bypassSecure = (req, res, next) => {
