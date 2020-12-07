@@ -78,19 +78,7 @@ var MovieList = function MovieList(props) {
       className: "movie-plot-header"
     }, "Plot:"), /*#__PURE__*/React.createElement("p", {
       className: "plot"
-    }, movie.plot), /*#__PURE__*/React.createElement("section", {
-      id: "reviews"
-    }, /*#__PURE__*/React.createElement("h4", {
-      className: "movie-review-header"
-    }, "Reviews:"), /*#__PURE__*/React.createElement("div", {
-      className: "rating-results"
-    }, /*#__PURE__*/React.createElement("h5", {
-      className: "reviewer"
-    }, movie.review.reviewerName), /*#__PURE__*/React.createElement("p", {
-      className: "rating"
-    }, "Rating: ", movie.review.rating, " stars"), /*#__PURE__*/React.createElement("p", {
-      className: "review"
-    }, movie.review.review))), /*#__PURE__*/React.createElement("h3", {
+    }, movie.plot), /*#__PURE__*/React.createElement("h3", {
       className: "trailer"
     }, /*#__PURE__*/React.createElement("a", {
       target: "_blank",
